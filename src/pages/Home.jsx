@@ -81,7 +81,7 @@ const Home = () => {
   }, [search]);
   useEffect(() => {
     if (type?.length) {
-      setSearch(type);
+      setSearch(type.toLowerCase());
     }
   }, [type]);
 

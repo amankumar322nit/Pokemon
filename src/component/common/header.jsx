@@ -12,10 +12,10 @@ export default function Header() {
     setSearch("");
    }
   },[input]);
-    
+
   const handelSearch = () => {
     if (input.length) {
-      setSearch(input);
+      setSearch(input.toLowerCase());
     }
   };
   return (
