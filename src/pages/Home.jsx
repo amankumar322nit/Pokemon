@@ -16,7 +16,6 @@ const Home = () => {
   const getAllPokemons = async (props) => {
     const { pageParam } = props;
     var url = "https://pokeapi.co/api/v2/pokemon/";
-    console.log(url);
     const res = await axios({
       url: url,
       params: {
@@ -56,7 +55,6 @@ const Home = () => {
             setPokemons(response.data.pokemon);
           })
           .catch(function (error) {
-            // handle error
             console.log(error);
           });
       } else {
@@ -72,7 +70,6 @@ const Home = () => {
             };
             const pokemons = [];
             pokemons.push(pokemon);
-            console.log(pokemons);
             setPokemons(pokemons);
           })
           .catch(function (error) {
@@ -91,8 +88,6 @@ const Home = () => {
   useEffect(() => {
     if (inView) fetchNextPage();
   }, [inView]);
-  console.log("search",search);
-  console.log('type',type);
   return (
     <>
       <div className="flex flex-col justify-end items-end">

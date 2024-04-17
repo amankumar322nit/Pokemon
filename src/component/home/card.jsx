@@ -1,9 +1,7 @@
 import React from 'react'
 
 const Card = ({id,name}) => {
-  
     id=id.toString();
-    console.log(id);
     var x=id.length;
     while(x<3){
       id='0'+id;

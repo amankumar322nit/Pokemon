@@ -16,6 +16,5 @@ export const typeData = [
     "ice",
     "dragon",
     "dark",
-    "fairy",
-    "shadow",
+    "fairy"
   ];
