@@ -121,7 +121,7 @@ const Home = () => {
                 var url = pokemon.url.split("/")[6];
                 return (
                   <div key={url} className="min-w-fit">
-                    <Link to={pokemon.url}>
+                    <Link to={`/${pokemon.id }`}>
                       <Card id={pokemon.id || url} name={name} />
                     </Link>
                   </div>

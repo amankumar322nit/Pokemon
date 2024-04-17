@@ -1,14 +1,19 @@
 import axios from "axios";
 // import React, { useEffect, useState } from 'react'
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactApexChart from "react-apexcharts";
+import { Context } from "../contextProvider";
 
 const Pokemon = () => {
-  const { id } = useParams();
+  var { id } = useParams();
   const [data, setData] = useState(null);
+  const { search, setSearch } = useContext(Context);
   useEffect(() => {
     var url = "https://pokeapi.co/api/v2/pokemon/" + id;
+    if (search.length) {
+      url = "https://pokeapi.co/api/v2/pokemon/" + search;
+    }
     axios
       .get(url)
       .then(function (response) {
@@ -17,6 +22,9 @@ const Pokemon = () => {
       .catch(function (error) {
         console.log(error);
       });
+  }, [search]);
+  useEffect(() => {
+    setSearch("");
   }, []);
   let imageId = id.toString();
   var x = imageId.length;
@@ -24,11 +32,22 @@ const Pokemon = () => {
     imageId = "0" + imageId;
     x++;
   }
-  var url =
-    "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/" +
-    imageId +
-    ".png";
-  //var url=`https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/${imageId}.png`;
+  var url = useMemo(() => {
+    var imageId = id.toString();
+    if(data?.id){
+       imageId=data.id.toString();
+    }
+    var x = imageId.length;
+    while (x < 3) {
+      imageId = "0" + imageId;
+      x++;
+    }
+    return (
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/" +
+      imageId +
+      ".png"
+    );
+  }, [data]);
   const options = useMemo(() => {
     var options = {
       color: "yellow",
@@ -69,17 +88,17 @@ const Pokemon = () => {
   }, [data]);
   return (
     <div className="flex flex-col justify-center items-center">
-    <p className="text-2xl font-bold text-black-500 leading-7 tracking-tight mt-10">
+      <p className="text-2xl font-bold text-black-500 leading-7 tracking-tight mt-10">
         {data?.name?.toUpperCase()}
       </p>
       <img className="w-1/4 h-1/4" src={url} alt="Pokemon" />
       <div className="flex flex-row gap-20">
-      <p className="text-xl font-medium text-black-500 leading-7 tracking-tight ">
-        Weight {data?.weight}kg
-      </p>
-      <p className="text-xl font-medium text-black-500 leading-7 tracking-tight">
-        Height {data?.height}m
-      </p>
+        <p className="text-xl font-medium text-black-500 leading-7 tracking-tight ">
+          Weight {data?.weight}kg
+        </p>
+        <p className="text-xl font-medium text-black-500 leading-7 tracking-tight">
+          Height {data?.height}m
+        </p>
       </div>
       <div className="flex flex-row justify-center items-center">
         {data &&
