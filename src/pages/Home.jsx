@@ -20,8 +20,8 @@ const Home = () => {
       url: url,
       params: {
         page: pageParam,
-        limit: pageParam * 20,
-        offset: pageParam * 20 - 20,
+        limit: pageParam * 24,
+        offset: pageParam * 24 - 24,
       },
       method: "get",
     });
