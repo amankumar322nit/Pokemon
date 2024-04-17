@@ -91,10 +91,10 @@ const Pokemon = () => {
     <>
       {data ? (
         <div className="flex flex-col justify-center items-center">
-          <p className="text-2xl font-bold text-black-500 leading-7 tracking-tight mt-10">
+          <p className="text-2xl font-bold text-black-500 leading-7 tracking-tight mt-5">
             {data?.name?.toUpperCase()}
           </p>
-          <img className="w-1/4 h-1/4" src={url} alt="Pokemon" />
+          <img className="w-1/5 h-1/5" src={url} alt="Pokemon" />
           <div className="flex flex-row gap-20">
             <p className="text-xl font-medium text-black-500 leading-7 tracking-tight ">
               Weight {data?.weight}kg
